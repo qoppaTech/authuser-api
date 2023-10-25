@@ -2,9 +2,9 @@
   "name": "authuser-api",
   "version": "1.0.0",
   "description": "REST API who manipulate SingUp and LogIn system",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "start:dev": "tsx --watch ./src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,12 @@
     "url": "https://github.com/QoppaTech/authuser-api/issues"
   },
   "homepage": "https://github.com/QoppaTech/authuser-api#readme",
-  "dependencies": {
-    "express": "^4.18.2",
-    "prisma": "^5.5.2",
+  "devDependencies": {
     "tsx": "^3.14.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "prisma": "^5.5.2"
   }
 }
