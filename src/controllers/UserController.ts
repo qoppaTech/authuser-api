@@ -27,11 +27,13 @@ export class UserController {
             const existentUsername = await prismaClient.user.findUnique({ where: { username } });
             const existentEmail = await prismaClient.user.findUnique({ where: { email } });
 
+
             if(existentUsername) {
                 return res.status(400).send( Handler.AlreadyExist("username") );
             } else if(existentEmail) {
                 return res.status(400).send( Handler.AlreadyExist("email") );
             }
+
 
              const encryptedPassword = await bcrypt.hash(password, 12);
 
@@ -44,9 +46,36 @@ export class UserController {
              })
 
              return res.status(200).send( Handler.SuccessfulRequest() );
-        } catch(err) {
+        } catch( err ) {
             return res.status(500).send( Handler.ServerError() );
         }
+    }
 
+    static async LogIn( req: Request, res: Response ) {
+        const {username, password} = req.body;
+
+        if(!username) {
+            return res.status(400).send( Handler.requiredField("username") );
+        } else if(!password) {
+            return res.status(400).send( Handler.requiredField("password") );
+        }
+
+        try{
+            const User = await prismaClient.user.findUnique({ where: { username } });
+            
+            if(!User) {
+                return res.status(400).send( Handler.UserNotFound(username) );
+            }
+
+            const match = bcrypt.compare(password, User.password);
+            if(match) {
+                return res.status(200).send( Handler.SuccessfulRequest("login") );
+            } else {
+                return res.status(401).send( Handler.NotAuthorized("password") );
+            }
+
+        } catch( err ) {
+            return res.status(500).send( Handler.ServerError() );
+        }
     }
 }

@@ -5,6 +5,8 @@ const router = Router();
 
 router
 .get("/SingUp", UserController.createUser)
-.get("/", (req: Request, res: Response) => res.status(200).send("Qoppa Tech"));
+.get("/LogIn", UserController.LogIn)
+.get("/", (req: Request, res: Response) => res.status(200).send("<p><h1>Welcome!</h1></p> <hr> <h2>Qoppa Tech </h2>"))
+.get("*", (req: Request, res: Response) => res.status(200).send("<h1>ERROR 404 -> PAGE NOT FOUND</h1><hr> <h2>Qoppa Tech </h2>"));
 
 export default router;
