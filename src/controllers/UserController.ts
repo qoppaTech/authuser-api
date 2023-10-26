@@ -23,6 +23,16 @@ export class UserController {
         }
 
         try{
+
+            const existentUsername = await prismaClient.user.findUnique({ where: { username } });
+            const existentEmail = await prismaClient.user.findUnique({ where: { email } });
+
+            if(existentUsername) {
+                return res.status(400).send( Handler.AlreadyExist("username") );
+            } else if(existentEmail) {
+                return res.status(400).send( Handler.AlreadyExist("email") );
+            }
+
              const encryptedPassword = await bcrypt.hash(password, 12);
 
              const user = await prismaClient.user.create({
@@ -33,7 +43,7 @@ export class UserController {
                 }
              })
 
-             return res.status(200).send()
+             return res.status(200).send( Handler.SuccessfulRequest() );
         } catch(err) {
             return res.status(500).send( Handler.ServerError() );
         }
