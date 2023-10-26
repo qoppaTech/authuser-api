@@ -8,4 +8,12 @@ export class HandlerErrors {
                 message: `The field ${field} is required.`
             }
     }
+
+    static async ValidationError(message: String) {
+            return {
+                error: 401,
+                type: "Client Validation Error",
+                message: `${message}`
+            }
+    }
 }

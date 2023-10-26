@@ -22,6 +22,7 @@ export class Validator {
 
         const result = schema.validate({username, email, password});
         return result;
+        
     }   
 }
 

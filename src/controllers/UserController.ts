@@ -8,15 +8,18 @@ export class UserController {
         const {username, email, password} = req.body;
 
         if(!username) {
-            return res.status(400).send(HandlerErrors.requiredField("username"));
+            return res.status(400).send(await HandlerErrors.requiredField("username"));
         } else if(!email) {
-            return res.status(400).send(HandlerErrors.requiredField("email"));
+            return res.status(400).send(await HandlerErrors.requiredField("email"));
         } else if(!password) {
-            return res.status(400).send(HandlerErrors.requiredField("password"));
+            return res.status(400).send(await HandlerErrors.requiredField("password"));
         }
 
-        const result = Validator.newUserValidator({username, email, password});
-        console.log(result)
+
+        const result = await Validator.newUserValidator({username, email, password});
+        if(result.error) {
+            return res.status(401)
+        }
 
     }
 }
