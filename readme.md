@@ -1,4 +1,5 @@
 <h1 align="center"> 🔐 authuser-api </h1>
+<div>
 
 RESTFUL API who manange the SingUp and LogIn system.
 The **authuser-api** uses:
@@ -44,8 +45,4 @@ API Developed by QoppaTech
   *ISC License*
   # QoppaTech - 2023 © Todos os direitos reservados.
   
-
-
-
-
-
+</div>
