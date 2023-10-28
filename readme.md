@@ -24,6 +24,11 @@ DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/qoppa_login?schema=public"
 
 Replace the marked fields to the respective information.
 
+We need to create the MySQL database, so write:
+```sh
+yarn prisma migrate dev
+```
+
 Now, you can start the project! 
 Use: 
 ```sh 
@@ -42,10 +47,4 @@ API Developed by QoppaTech
 
   *Developer: Marzeero*
   *ISC License*
-  # QoppaTech - 2023 © Todos os direitos reservados.
-  
-
-
-
-
-
+  # QoppaTech - 2023 © Todos os direitos reservados
