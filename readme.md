@@ -4,7 +4,7 @@ RESTFUL API who manange the SingUp and LogIn system.
 The **authuser-api** uses:
 * Typescript
 * NodeJS
-* MySQL
+* PostgreSQL
 * PrismaORM
 
 ## 💻 Development Enviroment
