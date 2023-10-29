@@ -4,7 +4,7 @@ RESTFUL API who manange the SingUp and LogIn system.
 The **authuser-api** uses:
 * Typescript
 * NodeJS
-* PostgreSQL
+* MySQL
 * PrismaORM
 
 ## 💻 Development Enviroment
@@ -20,6 +20,9 @@ In the *.env* file insert:
 PORT=3000
 
 DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/qoppa_login?schema=public"
+
+
+SECRET="OUR SECRET KEY"
 ```
 
 Replace the marked fields to the respective information.

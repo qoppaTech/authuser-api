@@ -79,13 +79,14 @@ export class Handler {
         }
     }
 
-    static SuccessfulRequest(arg?: String) {
+    static SuccessfulRequest(arg?: String, token?: String) {
         if(arg == "login") {
             return {
                 identifier: 200.1,
                 code: 200,
                 type: "Request successful",
-                message: "Logged with success!"
+                message: "Logged with success!",
+                token: token
                 }
         } else {
             return {

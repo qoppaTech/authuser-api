@@ -2,7 +2,13 @@ import { prismaClient } from "../database/PrismaClient";
 import { Request, Response } from "express";
 import { Validator } from "../validator/Validator";
 import { Handler } from "../handler/Handler";
-import bcrypt from 'bcrypt';
+import { config } from 'dotenv';
+import JWT from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
+config();
+
+const SECRET_KEY = process.env.SECRET;
 
 export class UserController {
     static async createUser( req: Request, res: Response ) {
@@ -46,7 +52,7 @@ export class UserController {
              })
 
              return res.status(200).send(Handler.SuccessfulRequest());
-        } catch( err ) {
+        } catch(err) {
             return res.status(500).send(Handler.ServerError());
         }
     }
@@ -69,7 +75,14 @@ export class UserController {
 
             const match = bcrypt.compare(password, User.password);
             if(match) {
-                return res.status(200).send(Handler.SuccessfulRequest("login"));
+                const payload = {
+                    user_id: User.id,
+                    username: User.username
+                }
+
+                const token = JWT.sign(payload, SECRET_KEY, { expiresIn: 3600 });
+
+                return res.status(200).send(Handler.SuccessfulRequest("login", token));
             } else {
                 return res.status(401).send(Handler.NotAuthorized("password"));
             }
