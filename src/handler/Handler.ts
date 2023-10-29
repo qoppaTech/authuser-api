@@ -25,6 +25,12 @@ export class Handler {
                 type: "Client Error",
                 message: `The email ${field} already exist.`
             }
+        } else {
+            return {
+                identifier: 2.0,
+                code: 400,
+                type: "Client Error"
+            }
         }
     }
 
@@ -56,13 +62,14 @@ export class Handler {
     }
 
     static NotAuthorized(arg?: String) {
-        if(!arg) {
+        if(arg === "password") {
             return {
-                identifier: 7.0,
+                identifier: 7.1,
                 code: 401,
-                type: "Not authorized request."
-            }
-        } else if(arg === "password") {
+                type: "Not authorized request.",
+                message: "Password is entered incorrectly"
+            }   
+        } else {
             return {
                 identifier: 7.1,
                 code: 401,
@@ -72,21 +79,20 @@ export class Handler {
         }
     }
 
-
     static SuccessfulRequest(arg?: String) {
-        if(!arg) {
-            return {
-               identifier: 200.0,
-                code: 200,
-                type: "Request successful"
-                }
-        } else if(arg === "login") {
+        if(arg == "login") {
             return {
                 identifier: 200.1,
                 code: 200,
                 type: "Request successful",
                 message: "Logged with success!"
                 }
+        } else {
+            return {
+                identifier: 200.0,
+                code: 200,
+                type: "Request successful"
+            }
         }
     }
 }

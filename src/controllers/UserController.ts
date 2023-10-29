@@ -29,9 +29,9 @@ export class UserController {
 
 
             if(existentUsername) {
-                return res.status(400).send( Handler.AlreadyExist("username") );
+                return res.status(400).send(Handler.AlreadyExist("username"));
             } else if(existentEmail) {
-                return res.status(400).send( Handler.AlreadyExist("email") );
+                return res.status(400).send(Handler.AlreadyExist("email"));
             }
 
 
@@ -45,9 +45,9 @@ export class UserController {
                 }
              })
 
-             return res.status(200).send( Handler.SuccessfulRequest() );
+             return res.status(200).send(Handler.SuccessfulRequest());
         } catch( err ) {
-            return res.status(500).send( Handler.ServerError() );
+            return res.status(500).send(Handler.ServerError());
         }
     }
 
@@ -55,27 +55,27 @@ export class UserController {
         const {username, password} = req.body;
 
         if(!username) {
-            return res.status(400).send( Handler.requiredField("username") );
+            return res.status(400).send(Handler.requiredField("username"));
         } else if(!password) {
-            return res.status(400).send( Handler.requiredField("password") );
+            return res.status(400).send(Handler.requiredField("password"));
         }
 
         try{
             const User = await prismaClient.user.findUnique({ where: { username } });
             
             if(!User) {
-                return res.status(400).send( Handler.UserNotFound(username) );
+                return res.status(400).send(Handler.UserNotFound(username));
             }
 
             const match = bcrypt.compare(password, User.password);
             if(match) {
-                return res.status(200).send( Handler.SuccessfulRequest("login") );
+                return res.status(200).send(Handler.SuccessfulRequest("login"));
             } else {
-                return res.status(401).send( Handler.NotAuthorized("password") );
+                return res.status(401).send(Handler.NotAuthorized("password"));
             }
 
-        } catch( err ) {
-            return res.status(500).send( Handler.ServerError() );
+        } catch(err) {
+            return res.status(500).send(Handler.ServerError());
         }
     }
 }
