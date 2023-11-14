@@ -1,4 +1,4 @@
-<h1 align="center"> 🔐 authuser-api </h1>
+<h1 align="center"> 🔐 authuser-api version 1.0 </h1>
 
 RESTFUL API who manange the SingUp and LogIn system.
 The **authuser-api** uses:
